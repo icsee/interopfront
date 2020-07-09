@@ -68,6 +68,40 @@ borderColor: '#F44436',
     options: optionsAnimations
   })
 
+  //chart4
+  var ctx4 = document.getElementById('chart4').getContext('2d')
+  var data4 = {
+    labels: [0],
+    datasets: [{
+      data: [0],
+      label: 'rssi-particle',
+      // backgroundColor: '#ff6600'
+      borderColor: '#F44436',
+      pointBackgroundColor: '#F44440'
+    },
+    {
+      data: [1],
+      label: 'rssi-lora',
+      //backgroundColor: '#ff6600',
+      borderColor: '#41D519',
+      pointBackgroundColor: '#229954'
+    },
+    {
+      data: [2],
+      label: 'rssi-bluetooth',
+      //backgroundColor: '#ff6600',
+      borderColor: ' #262c88',
+      pointBackgroundColor: '#1924d5'
+    },
+  
+  ]
+  }
+  var chart4 = new Chart(ctx4, {
+    type: 'line',
+    data: data4,
+    options: optionsAnimations
+  })
+
   
 
   // When a web socket message arrives:
@@ -122,12 +156,23 @@ borderColor: '#F44436',
   
           data3.labels.push(moment().format('HH:mm:ss'))
           data3.datasets[0].data.push(messageData.IotData.Particle)
-  
-    
+    //código para rssi
+   
+    var length = data4.labels.length
+    if (length >= 20) {
+      data4.datasets[0].data.shift()
+      data4.labels.shift()
+    }
+
+    data4.labels.push(moment().format('HH:mm:ss'))
+    data4.datasets[0].data.push(messageData.IotData.rssiParticle)
+    data4.datasets[1].data.push(messageData.IotData.rssiLora)
+    data4.datasets[2].data.push(messageData.IotData.rssiBluetooth)
   
     chart1.update()
     chart2.update()
     chart3.update()
+    chart4.update()
 
       myLineChart.update();
     } catch (err) {

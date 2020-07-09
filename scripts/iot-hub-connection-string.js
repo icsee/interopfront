@@ -27,6 +27,7 @@ function generateSasToken(resourceUri, signingKey, policyName, expiresInMins) {
 
 /**
  * Converts an IotHub Connection string into an Event Hubs-compatible connection string.
+ * "HostName=labsolarrasp.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=n8HMYIDtrJF5Nww9eO3FZd9+bi9jFtMOkQj2zQlskLA="
  * @param {string} connectionString An IotHub connection string in the format:
  * `"HostName=<your-iot-hub>.azure-devices.net;SharedAccessKeyName=<KeyName>;SharedAccessKey=<Key>"`
  * @returns {Promise<string>} An Event Hubs-compatible connection string in the format:

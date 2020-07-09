@@ -1,0 +1,3 @@
+Por CMD ejecute lo siguiente debe ser por CMD no bash
+set IotHubConnectionString=HostName=labsolarrasp.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=n8HMYIDtrJF5Nww9eO3FZd9+bi9jFtMOkQj2zQlskLA=
+set EventHubConsumerGroup=labsolar
