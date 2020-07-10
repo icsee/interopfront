@@ -161,6 +161,8 @@ borderColor: '#F44436',
     var length = data4.labels.length
     if (length >= 20) {
       data4.datasets[0].data.shift()
+      data4.datasets[1].data.shift()
+      data4.datasets[2].data.shift()
       data4.labels.shift()
     }
 
