@@ -14,7 +14,7 @@ $(document).ready(() => {
     labels: [0],
     datasets: [{
       data: [0],
-      label: 'Temperature',
+      label: 'lux',
       // backgroundColor: '#F44436',
       borderColor: '#F44436',
       pointBackgroundColor: '#F44436'
@@ -38,7 +38,7 @@ $(document).ready(() => {
     labels: [0],
     datasets: [{
       data: [0],
-      label: 'Temperature',
+      label: 'lux',
       // backgroundColor: '#ff6600'
       borderColor: '#F44436',
       pointBackgroundColor: '#F44438'
@@ -56,7 +56,7 @@ $(document).ready(() => {
     labels: [0],
     datasets: [{
       data: [0],
-      label: 'Potenciometro',
+      label: 'lux',
       // backgroundColor: '#ff6600'
 borderColor: '#F44436',
       pointBackgroundColor: '#F44440'
