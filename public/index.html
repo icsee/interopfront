@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <title>Tesis Nelson Agudelo</title>
+    <title>INTEROP</title>
     <link rel="stylesheet" href="/css/estilos.css">
   </head>
   <body>
@@ -60,7 +60,7 @@
         </div>
         <h2>Selecciona una tecnología</h2>
       <div class="botones">
-        <div class="b-col1">
+        <div class="b-col2">
           <div class="boton1">
             <button onclick="ble()"class="boton">Bluetooth</button>
           </div>
@@ -75,14 +75,18 @@
           <div class="boton4">
             <button onclick="todos()" class="boton">Todos</button>
           </div>
-         
         </div>
-        <div class="b-col3">
+        <div class="b-col2">
           <div class="boton5">
             <button onclick="rssi()" class="boton">RSSI</button>
           </div>
+          <div class="boton6">
+            <button onclick="gps()" class="boton">GPS</button>
+          </div>
         </div>
       </div>
+
+     
       <div class="cuadros">
         <div id="ble1" class="c-lora">
           <h3>BLE 4.0 - Sensor de luz</h3>
@@ -100,7 +104,24 @@
           <h3>Medición RSSI de las diferentes tecnologías</h3>
           <canvas id="chart4" width="400" height="150"></canvas>
         </div>
+        <div id="mapas" class="c-xbee">
+          <h3>Ubicación</h3>
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+          <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiJceqNKkkZkVFLqV1CcBXu-HhYkzIWuQ&callback=initMap&libraries=&v=weekly"
+            defer
+             ></script>
+           
+
+              <div id=map >      </div>
+             <div class="b-col1">
+               <h4>SRN:</h4>
+             </div>
+              
+            
+        </div>
       </div>
+      
     </div>
     <footer class="footer">
       <div class="footer-caja">
@@ -117,6 +138,7 @@
     <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"" type="text/javascript" charset="utf-8"></script>
     
     <script src="js/chart-device-data.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/mapas.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     
@@ -127,60 +149,7 @@
     
     <script type="text/javascript">
     
-      //const socket = io()
-      
-
-      /*socket.on('getLux', function(value, timeStamp){
-        // console.log(timeStamp);
-        paquetes++
-        const arrivalTime = new Date()
-        const arrivalMs = arrivalTime.getTime()
-        const latencia = arrivalMs - timeStamp
-        console.log("El dato " + value + " tardó " + latencia + "ms en llegar");
-        const elapsed = arrivalMs - start
-        if (elapsed >= 60000) {
-          console.log("Se recibieron " + paquetes + "/60 paquetes");
-          paquetes = 0
-          start = new Date()
-        }
-        var length = data.labels.length
-        if (length >= 20) {
-          data.datasets[0].data.shift()
-          data.labels.shift()
-        }
-
-        data.labels.push(moment().format('HH:mm:ss'))
-        data.datasets[0].data.push(value)
-
-        chart1.update()
-      });*/
-
-    /*  socket.on('getNum', function(value){
-        var length = data2.labels.length
-        if (length >= 20) {
-          data2.datasets[0].data.shift()
-          data2.labels.shift()
-        }
-
-        data2.labels.push(moment().format('HH:mm:ss'))
-        data2.datasets[0].data.push(value)
-
-        chart2.update()
-      });*/
-
-//socket pote
- /*     socket.on('getPote', function(value){
-        var length = data3.labels.length
-        if (length >= 20) {
-          data3.datasets[0].data.shift()
-          data3.labels.shift()
-        }
-
-        data3.labels.push(moment().format('HH:mm:ss'))
-        data3.datasets[0].data.push(value)
-
-        chart3.update()
-      });*/
+     
 
       // Menu //
       var barrras = document.getElementById('barras')
@@ -217,23 +186,27 @@
       var ble1 = document.getElementById('ble1')
       var xbee1 = document.getElementById('xbee1')
       var rssi1 = document.getElementById('rssi1')
+      var mapas = document.getElementById('mapas')
 
       function lora() {
         ble1.classList.add('borrar')
         xbee1.classList.add('borrar')
         rssi1.classList.add('borrar')
         lora1.classList.remove('borrar')
+        mapas.classList.add('borrar')
       }
       function ble() {
         lora1.classList.add('borrar')
         xbee1.classList.add('borrar')
         rssi1.classList.add('borrar')
         ble1.classList.remove('borrar')
+        mapas.classList.add('borrar')
       }
       function xbee() {
         ble1.classList.add('borrar')
         lora1.classList.add('borrar')
         rssi1.classList.add('borrar')
+        mapas.classList.add('borrar')
         xbee1.classList.remove('borrar')
       }
       function todos() {
@@ -241,12 +214,22 @@
         xbee1.classList.remove('borrar')
         rssi1.classList.remove('borrar')
         lora1.classList.remove('borrar')
+      
       }
       function rssi() {
         ble1.classList.add('borrar')
         xbee1.classList.add('borrar')
         rssi1.classList.remove('borrar')
         lora1.classList.add('borrar')
+        mapas.classList.add('borrar')
+      }
+      function gps() {
+       
+        ble1.classList.add('borrar')
+        xbee1.classList.add('borrar')
+        rssi1.classList.add('borrar')
+        lora1.classList.add('borrar')
+        mapas.classList.remove('borrar')
       }
     </script>
   </body>
