@@ -30,8 +30,6 @@
               lng: messageData.IotData.lng
             };
            
-           // var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-           
             
                var marker = new google.maps.Marker({
                 position: pos,
@@ -41,7 +39,8 @@
             
             map.setCenter(pos);
             marker.setMap(map);
-
+            document.getElementById("quetel").innerHTML = "Operador:"+messageData.IotData.operador
+            +",    Tecnología: "+ messageData.IotData.tecnologia+" ,    Fabricante Chip: " +messageData.IotData.fabricante +",     Modelo Chip: " +messageData.IotData.modelo
           
           }
           catch (err) {
