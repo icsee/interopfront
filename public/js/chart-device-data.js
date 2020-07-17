@@ -1,12 +1,15 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable no-restricted-globals */
+
 /* eslint-disable no-undef */
 $(document).ready(() => {
   // if deployed to a site supporting SSL, use wss://
   const protocol = document.location.protocol.startsWith('https') ? 'wss://' : 'ws://';
   const webSocket = new WebSocket(protocol + location.host);
-  
+  //const Mapa = require('./mapas.js');
   // A class for holding the last N points of telemetry for a device
+
+  //this.mapa =  new Mapa();
   let paquetes = 0
   let start = new Date()
   var ctx = document.getElementById('chart1').getContext('2d')
@@ -121,7 +124,16 @@ borderColor: '#F44436',
     try {
       var messageData = JSON.parse(message.data);
       console.log(messageData);
-
+      
+      var pos = {
+        lat: messageData.IotData.lat,
+        lng: messageData.IotData.lng,
+        operador: messageData.IotData.operador,
+        tecnologia:messageData.IotData.tecnologia,
+        fabricante:messageData.IotData.fabricante,
+        modelo:messageData.IotData.modelo
+      };
+      writemap(pos);
       
       /*paquetes++
       const arrivalTime = new Date()
@@ -185,10 +197,11 @@ borderColor: '#F44436',
     chart3.update()
     chart4.update()
 
-      myLineChart.update();
+     
       
     } catch (err) {
       console.error(err);
     }
   };
+
 });

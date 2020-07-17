@@ -6,7 +6,7 @@
         var latitud=41.40338 , longitud=2.17403
         var image ="/images/homero.png" 
         
-         function initMap() {
+        function initMap() {
           exports.map = new google.maps.Map(document.getElementById("map"), {
             center: {
               lat: latitud,
@@ -21,17 +21,15 @@
           });
         }
 
-        webSocketA.onmessage = function onMessage(message) {
-          try {
-            var messageData = JSON.parse(message.data);
-            console.log('Llego la informacion del gps');
-            var pos = {
-              lat: messageData.IotData.lat,
-              lng: messageData.IotData.lng
-            };
-           
+        function writemap (data) {
+          // nothing todo
+         
+          var pos = {
+            lat: data.lat,
+            lng: data.lng
+          };
             
-               var marker = new google.maps.Marker({
+             var marker = new google.maps.Marker({
                 position: pos,
                 title:"Aca estoy",
                 icon: image
@@ -39,15 +37,21 @@
             
             map.setCenter(pos);
             marker.setMap(map);
-            document.getElementById("quetel").innerHTML = "Operador:"+messageData.IotData.operador
-            +",    Tecnología: "+ messageData.IotData.tecnologia+" ,    Fabricante Chip: " +messageData.IotData.fabricante +",     Modelo Chip: " +messageData.IotData.modelo
+            document.getElementById("quetel").innerHTML = "Operador:"+data.operador
+            +",    Tecnología: "+ data.tecnologia+" ,    Fabricante Chip: " +data.fabricante +",     Modelo Chip: " +data.modelo
           
-          }
-          catch (err) {
-            console.error(err);
-          }
 
+        
         }
 
+
+
+
+
+
+
+
+        exports.writemap = writemap;
         exports.initMap = initMap;
+     
       })((this.window = this.window || {}));
