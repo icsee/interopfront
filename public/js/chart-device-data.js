@@ -92,7 +92,14 @@ borderColor: '#F44436',
       //backgroundColor: '#ff6600',
       borderColor: ' #262c88',
       pointBackgroundColor: '#1924d5'
+    },{
+      data: [3],
+      label: 'CSQ',
+      //backgroundColor: '#ff6600',
+      borderColor: '#f55a07',
+      pointBackgroundColor:'#f5c307'
     },
+  
   
   ]
   }
@@ -163,6 +170,7 @@ borderColor: '#F44436',
       data4.datasets[0].data.shift()
       data4.datasets[1].data.shift()
       data4.datasets[2].data.shift()
+      data4.datasets[3].data.shift()
       data4.labels.shift()
     }
 
@@ -170,6 +178,7 @@ borderColor: '#F44436',
     data4.datasets[0].data.push(messageData.IotData.rssiParticle)
     data4.datasets[1].data.push(messageData.IotData.rssiLora)
     data4.datasets[2].data.push(messageData.IotData.rssiBluetooth)
+    data4.datasets[3].data.push(messageData.IotData.CSQ)
   
     chart1.update()
     chart2.update()
