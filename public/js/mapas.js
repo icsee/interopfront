@@ -1,8 +1,8 @@
 
     (function(exports) {
         "use strict";
-        const protocol = document.location.protocol.startsWith('https') ? 'wss://' : 'ws://';
-        const webSocket = new WebSocket(protocol + location.host);
+        const protocolA = document.location.protocol.startsWith('https') ? 'wss://' : 'ws://';
+        const webSocketA = new WebSocket(protocolA + location.host);
         var latitud=41.40338 , longitud=2.17403
         var image ="/images/homero.png" 
         
@@ -21,7 +21,7 @@
           });
         }
 
-        webSocket.onmessage = function onMessage(message) {
+        webSocketA.onmessage = function onMessage(message) {
           try {
             var messageData = JSON.parse(message.data);
             console.log('Llego la informacion del gps');
