@@ -61,15 +61,20 @@ $(document).ready(() => {
       data: [0],
       label: 'lux',
       // backgroundColor: '#ff6600'
-borderColor: '#F44436',
+      borderColor: '#F44436',
       pointBackgroundColor: '#F44440'
-    }]
+    }
+  
+  
+  ]
   }
   var chart3 = new Chart(ctx3, {
     type: 'line',
     data: data3,
     options: optionsAnimations
   })
+
+
 
   //chart4
   var ctx4 = document.getElementById('chart4').getContext('2d')
@@ -101,7 +106,14 @@ borderColor: '#F44436',
       //backgroundColor: '#ff6600',
       borderColor: '#f55a07',
       pointBackgroundColor:'#f5c307'
+    },{
+      data: [4],
+      label: 'wifi-rssi',
+      //backgroundColor: '#ff6600',
+      borderColor: '#f55a07',
+      pointBackgroundColor:'#f5c307'
     },
+
   
   
   ]
@@ -112,7 +124,28 @@ borderColor: '#F44436',
     options: optionsAnimations
   })
 
+
+  //chart5
+  var ctx5 = document.getElementById('chart5').getContext('2d')
+  var data5 = {
+    labels: [0],
+    datasets: [{
+      data: [0],
+      label: 'lux',
+      // backgroundColor: '#ff6600'
+      borderColor: ' #262c88',
+      pointBackgroundColor: '#1924d5'
+    }
   
+  
+  ]
+  }
+  var chart5 = new Chart(ctx5, {
+    type: 'line',
+    data: data5,
+    options: optionsAnimations
+  })
+
 
   // When a web socket message arrives:
   // 1. Unpack it
@@ -124,7 +157,7 @@ borderColor: '#F44436',
     try {
       var messageData = JSON.parse(message.data);
       console.log(messageData);
-      
+  
       var pos = {
         lat: messageData.IotData.lat,
         lng: messageData.IotData.lng,
@@ -133,6 +166,7 @@ borderColor: '#F44436',
         fabricante:messageData.IotData.fabricante,
         modelo:messageData.IotData.modelo
       };
+      
       writemap(pos);
       
       /*paquetes++
@@ -146,15 +180,16 @@ borderColor: '#F44436',
         paquetes = 0
         start = new Date()
       }*/
+
+
       var length = data.labels.length
       if (length >= 20) {
         data.datasets[0].data.shift()
         data.labels.shift()
       }
 
-      data.labels.push(moment().format('HH:mm:ss'))
-      data.datasets[0].data.push(messageData.IotData.Bluetooth)
-//código para el sistema Lora
+      
+       //código para el sistema Lora
    
         var length = data2.labels.length
         if (length >= 20) {
@@ -162,8 +197,7 @@ borderColor: '#F44436',
           data2.labels.shift()  
         }
 
-        data2.labels.push(moment().format('HH:mm:ss'))
-        data2.datasets[0].data.push(messageData.IotData.Lora)
+       
 
         //código para particle
    
@@ -173,8 +207,7 @@ borderColor: '#F44436',
             data3.labels.shift()
           }
   
-          data3.labels.push(moment().format('HH:mm:ss'))
-          data3.datasets[0].data.push(messageData.IotData.Particle)
+         
     //código para rssi
    
     var length = data4.labels.length
@@ -186,17 +219,40 @@ borderColor: '#F44436',
       data4.labels.shift()
     }
 
+    var length = data5.labels.length
+    if (length >= 20) {
+      data5.datasets[0].data.shift()
+      data5.labels.shift()
+    }
+
+
+    if(messageData.DeviceId==="raspberrylabsolar"){
     data4.labels.push(moment().format('HH:mm:ss'))
+    data3.labels.push(moment().format('HH:mm:ss'))
+    data2.labels.push(moment().format('HH:mm:ss'))
+    data.labels.push(moment().format('HH:mm:ss'))
+    data.datasets[0].data.push(messageData.IotData.Bluetooth)
+    data2.datasets[0].data.push(messageData.IotData.Lora)
+    data3.datasets[0].data.push(messageData.IotData.Particle)
     data4.datasets[0].data.push(messageData.IotData.rssiParticle)
     data4.datasets[1].data.push(messageData.IotData.rssiLora)
     data4.datasets[2].data.push(messageData.IotData.rssiBluetooth)
     data4.datasets[3].data.push(messageData.IotData.CSQ)
-  
-    chart1.update()
-    chart2.update()
-    chart3.update()
-    chart4.update()
+    
+    }
+    //
+    if(messageData.DeviceId==="450028000851363136363935"){
+      data5.labels.push(moment().format('HH:mm:ss'))
+      data5.datasets[0].data.push(messageData.IotData.value_wifi)
+      
+     }
 
+     chart1.update()
+     chart2.update()
+     chart3.update()
+     chart4.update()
+     chart5.update()
+    
      
       
     } catch (err) {
