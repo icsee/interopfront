@@ -191,21 +191,21 @@ $(document).ready(() => {
       
        //código para el sistema Lora
    
-    /*    var length = data2.labels.length
+       var length = data2.labels.length
         if (length >= 20) {
           data2.datasets[0].data.shift()
           data2.labels.shift()  
-        }*/
+        }
 
        
 
         //código para particle
    
-          var length = data3.labels.length
+     /*     var length = data3.labels.length
           if (length >= 20) {
             data3.datasets[0].data.shift()
             data3.labels.shift()
-          }
+          }*/
   
          
     //código para rssi
@@ -233,7 +233,7 @@ $(document).ready(() => {
     data.labels.push(moment().format('HH:mm:ss'))
     data.datasets[0].data.push(messageData.IotData.Bluetooth)
     data2.datasets[0].data.push(messageData.IotData.Lora)
-    data3.datasets[0].data.push(messageData.IotData.Particle)
+    //data3.datasets[0].data.push(messageData.IotData.Particle)
     data4.datasets[0].data.push(messageData.IotData.rssiParticle)
     data4.datasets[1].data.push(messageData.IotData.rssiLora)
     data4.datasets[2].data.push(messageData.IotData.rssiBluetooth)
