@@ -54,7 +54,7 @@ $(document).ready(() => {
   })
 
   //chart3
-  var ctx3 = document.getElementById('chart3').getContext('2d')
+ /* var ctx3 = document.getElementById('chart3').getContext('2d')
   var data3 = {
     labels: [0],
     datasets: [{
@@ -72,7 +72,7 @@ $(document).ready(() => {
     type: 'line',
     data: data3,
     options: optionsAnimations
-  })
+  })*/
 
 
 
@@ -191,11 +191,11 @@ $(document).ready(() => {
       
        //código para el sistema Lora
    
-        var length = data2.labels.length
+    /*    var length = data2.labels.length
         if (length >= 20) {
           data2.datasets[0].data.shift()
           data2.labels.shift()  
-        }
+        }*/
 
        
 
@@ -228,7 +228,7 @@ $(document).ready(() => {
 
     if(messageData.DeviceId==="raspberrylabsolar"){
     data4.labels.push(moment().format('HH:mm:ss'))
-    data3.labels.push(moment().format('HH:mm:ss'))
+    //data3.labels.push(moment().format('HH:mm:ss'))
     data2.labels.push(moment().format('HH:mm:ss'))
     data.labels.push(moment().format('HH:mm:ss'))
     data.datasets[0].data.push(messageData.IotData.Bluetooth)
@@ -249,7 +249,7 @@ $(document).ready(() => {
 
      chart1.update()
      chart2.update()
-     chart3.update()
+     //chart3.update()
      chart4.update()
      chart5.update()
     
