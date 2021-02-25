@@ -234,16 +234,18 @@ $(document).ready(() => {
     data.datasets[0].data.push(messageData.IotData.Bluetooth)
     data2.datasets[0].data.push(messageData.IotData.Lora)
     //data3.datasets[0].data.push(messageData.IotData.Particle)
-    data4.datasets[0].data.push(messageData.IotData.rssiParticle)
+    
     data4.datasets[1].data.push(messageData.IotData.rssiLora)
     data4.datasets[2].data.push(messageData.IotData.rssiBluetooth)
     data4.datasets[3].data.push(messageData.IotData.CSQ)
     
     }
-    //
+    
     if(messageData.DeviceId==="450028000851363136363935"){
       data5.labels.push(moment().format('HH:mm:ss'))
       data5.datasets[0].data.push(messageData.IotData.value_wifi)
+      data4.labels.push(moment().format('HH:mm:ss'))
+      data4.datasets[0].data.push(messageData.IotData.data)
       
      }
 
