@@ -70,10 +70,10 @@
         </div>
         <div class="b-col2">
           <div class="boton3">
-            <button onclick="xbee()"class="boton">WiFi</button>
+            <button onclick="wifi()"class="boton">WiFi</button>
           </div>
           <div class="boton4">
-            <button onclick="todos()" class="boton">Todos</button>
+            <button onclick="todos()" class="boton">Sensores</button>
           </div>
         </div>
         <div class="b-col2">
@@ -96,12 +96,27 @@
           <h3>LoRa RA02 - Sensor de luminosidad</h3>
           <canvas id="chart2" width="400" height="150"></canvas>
         </div>
+       
+
         <div id="xbee1" class="c-xbee">
           <h3>WiFi Photon Particle- Sensor de luminosidad</h3>
           <canvas id="chart5" width="400" height="150"></canvas>
         </div>
-        <div id="rssi1" class="c-xbee">
-          <h3>Medición RSSI de las diferentes tecnologías</h3>
+      
+        <div id="rssible" class="c-xbee">
+          <h3>Medición RSSI bluetooth low energy</h3>
+          <canvas id="chart6" width="400" height="150"></canvas>
+        </div>
+        <div id="rssilora" class="c-xbee">
+          <h3>Medición RSSI LORA </h3>
+          <canvas id="chart7" width="400" height="150"></canvas>
+        </div>
+        <div id="rssiwifi" class="c-xbee">
+          <h3>Medición RSSI WI-FI </h3>
+          <canvas id="chart8" width="400" height="150"></canvas>
+        </div>
+        <div id="CSQ" class="c-xbee">
+          <h3>CSQ</h3>
           <canvas id="chart4" width="400" height="150"></canvas>
         </div>
         <div id="mapas" class="c-xbee">
@@ -184,52 +199,74 @@
       // Botones//
       var lora1 = document.getElementById('lora1')
       var ble1 = document.getElementById('ble1')
-      var xbee1 = document.getElementById('xbee1')
-      var rssi1 = document.getElementById('rssi1')
+      var wifi1 = document.getElementById('xbee1')
+      var rssilora = document.getElementById('rssilora')
+      var csq=document.getElementById('CSQ')
+      var rssible = document.getElementById('rssible')
+      var rssiwifi = document.getElementById('rssiwifi')
       var mapas = document.getElementById('mapas')
 
       function lora() {
         ble1.classList.add('borrar')
-        xbee1.classList.add('borrar')
-        rssi1.classList.add('borrar')
+        wifi1.classList.add('borrar')
+        rssilora.classList.remove('borrar')
+        rssible.classList.add('borrar')
+        rssiwifi.classList.add('borrar')
+        csq.classList.add('borrar')
         lora1.classList.remove('borrar')
+
         mapas.classList.add('borrar')
       }
       function ble() {
         lora1.classList.add('borrar')
-        xbee1.classList.add('borrar')
-        rssi1.classList.add('borrar')
+        wifi1.classList.add('borrar')
+        rssible.classList.remove('borrar')
+        rssilora.classList.add('borrar')
+        rssiwifi.classList.add('borrar')
+        csq.classList.add('borrar')
         ble1.classList.remove('borrar')
         mapas.classList.add('borrar')
       }
-      function xbee() {
+      function wifi() {
         ble1.classList.add('borrar')
         lora1.classList.add('borrar')
-        rssi1.classList.add('borrar')
+        rssiwifi.classList.remove('borrar')
+        rssible.classList.add('borrar')
+        rssilora.classList.add('borrar')
+        csq.classList.add('borrar')
         mapas.classList.add('borrar')
-        xbee1.classList.remove('borrar')
+        wifi1.classList.remove('borrar')
       }
       function todos() {
         ble1.classList.remove('borrar')
-        xbee1.classList.remove('borrar')
-        rssi1.classList.remove('borrar')
+        wifi1.classList.remove('borrar')
         lora1.classList.remove('borrar')
-      
+        mapas.classList.remove('borrar')
+        rssiwifi.classList.add('borrar')
+        csq.classList.add('borrar')
+        rssible.classList.add('borrar')
+        rssilora.classList.add('borrar')
       }
       function rssi() {
         ble1.classList.add('borrar')
-        xbee1.classList.add('borrar')
-        rssi1.classList.remove('borrar')
+        wifi1.classList.add('borrar')
+        rssilora.classList.remove('borrar')
+        rssible.classList.remove('borrar')
+        rssiwifi.classList.remove('borrar')
+        csq.classList.remove('borrar')
         lora1.classList.add('borrar')
         mapas.classList.add('borrar')
       }
       function gps() {
        
         ble1.classList.add('borrar')
-        xbee1.classList.add('borrar')
-        rssi1.classList.add('borrar')
+        wifi1.classList.add('borrar')
+        rssiwifi.classList.add('borrar')
+        rssible.classList.add('borrar')
+        rssilora.classList.add('borrar')
         lora1.classList.add('borrar')
         mapas.classList.remove('borrar')
+        csq.classList.remove('borrar')
       }
     </script>
   </body>

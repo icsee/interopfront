@@ -53,77 +53,28 @@ $(document).ready(() => {
     options: optionsAnimations
   })
 
-  //chart3
- /* var ctx3 = document.getElementById('chart3').getContext('2d')
-  var data3 = {
-    labels: [0],
-    datasets: [{
-      data: [0],
-      label: 'lux',
-      // backgroundColor: '#ff6600'
-      borderColor: '#F44436',
-      pointBackgroundColor: '#F44440'
-    }
-  
-  
-  ]
-  }
-  var chart3 = new Chart(ctx3, {
-    type: 'line',
-    data: data3,
-    options: optionsAnimations
-  })*/
-
-
-
-  //chart4
-  var ctx4 = document.getElementById('chart4').getContext('2d')
-  var data4 = {
-    labels: [0],
-    datasets: [{
-      data: [0],
-      label: 'rssi-particle',
-      // backgroundColor: '#ff6600'
-      borderColor: '#F44436',
-      pointBackgroundColor: '#F44440'
-    },
-    {
-      data: [1],
-      label: 'rssi-lora',
-      //backgroundColor: '#ff6600',
-      borderColor: '#41D519',
-      pointBackgroundColor: '#229954'
-    },
-    {
-      data: [2],
-      label: 'rssi-bluetooth',
-      //backgroundColor: '#ff6600',
-      borderColor: ' #262c88',
-      pointBackgroundColor: '#1924d5'
-    },{
-      data: [3],
-      label: 'CSQ',
-      //backgroundColor: '#ff6600',
-      borderColor: '#f55a07',
-      pointBackgroundColor:'#f5c307'
-    },{
-      data: [4],
-      label: 'wifi-rssi',
-      //backgroundColor: '#ff6600',
-      borderColor: '#f55a07',
-      pointBackgroundColor:'#f5c307'
-    },
-
-  
-  
-  ]
-  }
-  var chart4 = new Chart(ctx4, {
-    type: 'line',
-    data: data4,
-    options: optionsAnimations
-  })
-
+   //chart4
+   var ctx4 = document.getElementById('chart4').getContext('2d')
+   var data4 = {
+     labels: [0],
+     datasets: [{
+       data: [0],
+       label: 'CSQ',
+       // backgroundColor: '#ff6600'
+       borderColor: ' #262c88',
+       pointBackgroundColor: '#1924d5'
+     }
+   
+   
+   ]
+   }
+   var chart4 = new Chart(ctx4, {
+     type: 'line',
+     data: data4,
+     options: optionsAnimations
+   })
+ 
+ 
 
   //chart5
   var ctx5 = document.getElementById('chart5').getContext('2d')
@@ -145,6 +96,73 @@ $(document).ready(() => {
     data: data5,
     options: optionsAnimations
   })
+
+
+//chart6
+var ctx6 = document.getElementById('chart6').getContext('2d')
+var data6 = {
+  labels: [0],
+  datasets: [{
+    data: [0],
+    label: 'lux',
+    // backgroundColor: '#ff6600'
+    borderColor: ' #262c88',
+    pointBackgroundColor: '#1924d5'
+  }
+
+
+]
+}
+var chart6 = new Chart(ctx6, {
+  type: 'line',
+  data: data6,
+  options: optionsAnimations
+})
+
+
+//chart7
+var ctx7 = document.getElementById('chart7').getContext('2d')
+var data7 = {
+  labels: [0],
+  datasets: [{
+    data: [0],
+    label: 'lux',
+    // backgroundColor: '#ff6600'
+    borderColor: ' #262c88',
+    pointBackgroundColor: '#1924d5'
+  }
+
+
+]
+}
+var chart7 = new Chart(ctx7, {
+  type: 'line',
+  data: data7,
+  options: optionsAnimations
+})
+
+
+//chart8
+var ctx8 = document.getElementById('chart8').getContext('2d')
+var data8 = {
+  labels: [0],
+  datasets: [{
+    data: [0],
+    label: 'lux',
+    // backgroundColor: '#ff6600'
+    borderColor: ' #262c88',
+    pointBackgroundColor: '#1924d5'
+  }
+
+
+]
+}
+var chart8 = new Chart(ctx8, {
+  type: 'line',
+  data: data8,
+  options: optionsAnimations
+})
+
 
 
   // When a web socket message arrives:
@@ -197,7 +215,12 @@ $(document).ready(() => {
           data2.labels.shift()  
         }
 
-       
+        var length = data4.labels.length
+        if (length >= 20) {
+          data4.datasets[0].data.shift()
+          data4.labels.shift()  
+        }
+
 
         //código para particle
    
@@ -208,21 +231,32 @@ $(document).ready(() => {
           }*/
   
          
-    //código para rssi
+    
    
-    var length = data4.labels.length
-    if (length >= 20) {
-      data4.datasets[0].data.shift()
-      data4.datasets[1].data.shift()
-      data4.datasets[2].data.shift()
-      data4.datasets[3].data.shift()
-      data4.labels.shift()
-    }
+    
 
     var length = data5.labels.length
     if (length >= 20) {
       data5.datasets[0].data.shift()
       data5.labels.shift()
+    }
+
+    var length = data6.labels.length
+    if (length >= 20) {
+      data6.datasets[0].data.shift()
+      data6.labels.shift()
+    }
+
+    var length = data7.labels.length
+    if (length >= 20) {
+      data7.datasets[0].data.shift()
+      data7.labels.shift()
+    }
+
+    var length = data8.labels.length
+    if (length >= 20) {
+      data8.datasets[0].data.shift()
+      data8.labels.shift()
     }
 
 
@@ -235,28 +269,31 @@ $(document).ready(() => {
     data2.datasets[0].data.push(messageData.IotData.Lora)
     //data3.datasets[0].data.push(messageData.IotData.Particle)
     
-    data4.datasets[1].data.push(messageData.IotData.rssiLora)
-    data4.datasets[2].data.push(messageData.IotData.rssiBluetooth)
-    data4.datasets[3].data.push(messageData.IotData.CSQ)
+    data7.datasets[0].data.push(messageData.IotData.rssiLora)
+    data6.datasets[0].data.push(messageData.IotData.rssiBluetooth)
+    data4.datasets[0].data.push(messageData.IotData.CSQ)
     
     }
     
     if(messageData.DeviceId==="450028000851363136363935"){
-     
+     if(messageData.IotData.value_wifi=!null){
       data5.labels.push(moment().format('HH:mm:ss'))
       data5.datasets[0].data.push(messageData.IotData.value_wifi)
-      chart5.update()
-     
-      /*else{
-      data4.labels.push(moment().format('HH:mm:ss'))
-      data4.datasets[0].data.push(messageData.IotData.data)}*/
-      
+      chart5.update()}
+    if(messageData.IotData.IotData.data=!null){
+      data8.labels.push(moment().format('HH:mm:ss'))
+      data8.datasets[0].data.push(messageData.IotData.data)
+      chart8.update()
+       }
+            
      }
 
      chart1.update()
      chart2.update()
      //chart3.update()
      chart4.update()
+     chart6.update()
+     chart7.update()
     
     
      
