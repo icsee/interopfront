@@ -242,10 +242,14 @@ $(document).ready(() => {
     }
     
     if(messageData.DeviceId==="450028000851363136363935"){
+     
       data5.labels.push(moment().format('HH:mm:ss'))
       data5.datasets[0].data.push(messageData.IotData.value_wifi)
+      chart5.update()
+     
+      /*else{
       data4.labels.push(moment().format('HH:mm:ss'))
-      data4.datasets[0].data.push(messageData.IotData.data)
+      data4.datasets[0].data.push(messageData.IotData.data)}*/
       
      }
 
@@ -253,7 +257,7 @@ $(document).ready(() => {
      chart2.update()
      //chart3.update()
      chart4.update()
-     chart5.update()
+    
     
      
       
