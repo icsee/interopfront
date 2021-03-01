@@ -104,7 +104,7 @@ var data6 = {
   labels: [0],
   datasets: [{
     data: [0],
-    label: 'lux',
+    label: 'RSSI-BLE',
     // backgroundColor: '#ff6600'
     borderColor: ' #262c88',
     pointBackgroundColor: '#1924d5'
@@ -126,7 +126,7 @@ var data7 = {
   labels: [0],
   datasets: [{
     data: [0],
-    label: 'lux',
+    label: 'RSSI-LORA',
     // backgroundColor: '#ff6600'
     borderColor: ' #262c88',
     pointBackgroundColor: '#1924d5'
@@ -148,7 +148,7 @@ var data8 = {
   labels: [0],
   datasets: [{
     data: [0],
-    label: 'lux',
+    label: 'RSSI Wi-fi',
     // backgroundColor: '#ff6600'
     borderColor: ' #262c88',
     pointBackgroundColor: '#1924d5'
