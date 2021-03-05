@@ -268,19 +268,22 @@ var chart8 = new Chart(ctx8, {
     data.datasets[0].data.push(messageData.IotData.Bluetooth)
     data2.datasets[0].data.push(messageData.IotData.Lora)
     //data3.datasets[0].data.push(messageData.IotData.Particle)
-    
+    data7.labels.push(moment().format('HH:mm:ss'))
     data7.datasets[0].data.push(messageData.IotData.rssiLora)
+    data6.labels.push(moment().format('HH:mm:ss'))
     data6.datasets[0].data.push(messageData.IotData.rssiBluetooth)
+    
     data4.datasets[0].data.push(messageData.IotData.CSQ)
     
     }
     
     if(messageData.DeviceId==="450028000851363136363935"){
-     if(messageData.IotData.value_wifi=!null){
+     if(messageData.IotData.value_wifi>=0){
       data5.labels.push(moment().format('HH:mm:ss'))
       data5.datasets[0].data.push(messageData.IotData.value_wifi)
-      chart5.update()}
-    if(messageData.IotData.IotData.data=!null){
+      chart5.update()
+        }
+     if(messageData.IotData.data<0) {
       data8.labels.push(moment().format('HH:mm:ss'))
       data8.datasets[0].data.push(messageData.IotData.data)
       chart8.update()
