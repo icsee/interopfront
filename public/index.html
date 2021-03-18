@@ -50,7 +50,7 @@
     </header>
     <div class="contenido contenedor">
       <div class="portada">
-        <h1>Interoperabilidad BLE-WiFi-LoRa</h1>
+        <h1>Interoperabilidad BLE-WiFi-LoRa-LoRaWAN</h1>
         <p align="justify">Este prototipo, creado con fines académicos, permite visualizar en tiempo real la respuesta de diversas tecnologías de comunicación inalámbrica BLE, WiFi y LoRa 
           y la interoperabilidad con la red celular para procesar información en la nube.
           <br>
@@ -82,6 +82,11 @@
           </div>
           <div class="boton6">
             <button onclick="gps()" class="boton">CEL/GPS</button>
+          </div>
+          </div>
+          <div class="b-col2"></div>
+          <div class="boton7">
+            <button onclick="loraWan()" class="boton">LoRaWAN</button>
           </div>
         </div>
       </div>
@@ -119,6 +124,14 @@
           <h3>CSQ</h3>
           <canvas id="chart4" width="400" height="150"></canvas>
         </div>
+        <div id="lorawanTemp" class="c-xbee">
+          <h3>Temperatura</h3>
+          <canvas id="chart9" width="400" height="150"></canvas>
+        </div>
+        <div id="lorawanRssi" class="c-xbee">
+          <h3>RSSI-LoRaWAN</h3>
+          <canvas id="chart10" width="400" height="150"></canvas>
+        </div>
         <div id="mapas" class="c-xbee">
           <h3>Ubicación</h3>
           <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -129,12 +142,14 @@
            
               <div id=map >      </div>
 
-             
+            
               <div >
               <h4 id="quetel">Operador:</h4>
               </div>
               
         </div>
+        
+        
       </div>
       
     </div>
@@ -151,12 +166,13 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"" type="text/javascript" charset="utf-8"></script>
-    
+
     <script src="js/chart-device-data.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/mapas.js" type="text/javascript" charset="utf-8"></script>
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     
     
@@ -164,6 +180,10 @@
     
     <script type="text/javascript">
     
+
+
+    
+
      
 
       // Menu //
@@ -204,7 +224,8 @@
       var csq=document.getElementById('CSQ')
       var rssible = document.getElementById('rssible')
       var rssiwifi = document.getElementById('rssiwifi')
-      var mapas = document.getElementById('mapas')
+      var lorawan = document.getElementById('lorawanTemp')
+      var lorawanRssi = document.getElementById('lorawanRssi')
 
       function lora() {
         ble1.classList.add('borrar')
@@ -214,8 +235,9 @@
         rssiwifi.classList.add('borrar')
         csq.classList.add('borrar')
         lora1.classList.remove('borrar')
-
+        lorawan.classList.add('borrar')
         mapas.classList.add('borrar')
+        lorawanRssi.classList.add('borrar')
       }
       function ble() {
         lora1.classList.add('borrar')
@@ -226,6 +248,8 @@
         csq.classList.add('borrar')
         ble1.classList.remove('borrar')
         mapas.classList.add('borrar')
+        lorawan.classList.add('borrar')
+        lorawanRssi.classList.add('borrar')
       }
       function wifi() {
         ble1.classList.add('borrar')
@@ -236,6 +260,8 @@
         csq.classList.add('borrar')
         mapas.classList.add('borrar')
         wifi1.classList.remove('borrar')
+        lorawan.classList.add('borrar')
+        lorawanRssi.classList.add('borrar')
       }
       function todos() {
         ble1.classList.remove('borrar')
@@ -246,6 +272,8 @@
         csq.classList.add('borrar')
         rssible.classList.add('borrar')
         rssilora.classList.add('borrar')
+        lorawan.classList.add('borrar')
+        lorawanRssi.classList.add('borrar')
       }
       function rssi() {
         ble1.classList.add('borrar')
@@ -256,6 +284,8 @@
         csq.classList.remove('borrar')
         lora1.classList.add('borrar')
         mapas.classList.add('borrar')
+        lorawan.classList.add('borrar')
+        lorawanRssi.classList.add('borrar')
       }
       function gps() {
        
@@ -266,8 +296,26 @@
         rssilora.classList.add('borrar')
         lora1.classList.add('borrar')
         mapas.classList.remove('borrar')
+        mapaslora.classList.remove('borrar')
         csq.classList.remove('borrar')
+        lorawan.classList.add('borrar')
+        lorawanRssi.classList.add('borrar')
       }
+
+
+      function loraWan() {
+       
+       ble1.classList.add('borrar')
+       wifi1.classList.add('borrar')
+       rssiwifi.classList.add('borrar')
+       rssible.classList.add('borrar')
+       rssilora.classList.add('borrar')
+       lora1.classList.add('borrar')
+       mapas.classList.remove('borrar')
+       csq.classList.add('borrar')
+       lorawan.classList.remove('borrar')
+       lorawanRssi.classList.remove('borrar')
+     }
     </script>
   </body>
 </html>

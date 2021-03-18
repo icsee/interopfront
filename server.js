@@ -3,6 +3,10 @@ const http = require('http');
 const WebSocket = require('ws');
 const path = require('path');
 const EventHubReader = require('./scripts/event-hub-reader.js');
+const axios = require('axios');
+
+
+
 
 const iotHubConnectionString = process.env.IotHubConnectionString;
 if (!iotHubConnectionString) {
@@ -28,6 +32,37 @@ app.use((req, res /* , next */) => {
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
+
+
+
+
+
+function comando1() {
+  axios.get('http://207.180.243.60:8080/suomayaApiRest/api/consultdatogatewaylora')
+  .then(function (response) {
+    // handle success
+    console.log(response.data);
+    wss.broadcast(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+
+}
+
+
+
+
+
+
+setInterval(comando1, 5000);
+
+
+
 
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
@@ -63,3 +98,4 @@ const eventHubReader = new EventHubReader(iotHubConnectionString, eventHubConsum
     }
   });
 })().catch();
+

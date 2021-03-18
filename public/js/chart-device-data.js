@@ -164,6 +164,52 @@ var chart8 = new Chart(ctx8, {
 })
 
 
+//chart9 TEMPERATURA LORAWAN
+var ctx9 = document.getElementById('chart9').getContext('2d')
+var data9 = {
+  labels: [0],
+  datasets: [{
+    data: [0],
+    label: '°C',
+    // backgroundColor: '#ff6600'
+    borderColor: ' #262c88',
+    pointBackgroundColor: '#1924d5'
+  }
+
+
+]
+}
+var chart9 = new Chart(ctx9, {
+  type: 'line',
+  data: data9,
+  options: optionsAnimations
+})
+
+
+
+//chart10 RSSI LORAWAN
+var ctx10 = document.getElementById('chart10').getContext('2d')
+var data10 = {
+  labels: [0],
+  datasets: [{
+    data: [0],
+    label: 'dB',
+    // backgroundColor: '#ff6600'
+    borderColor: ' #262c88',
+    pointBackgroundColor: '#1924d5'
+  }
+
+
+]
+}
+var chart10 = new Chart(ctx10, {
+  type: 'line',
+  data: data10,
+  options: optionsAnimations
+})
+
+
+
 
   // When a web socket message arrives:
   // 1. Unpack it
@@ -174,8 +220,8 @@ var chart8 = new Chart(ctx8, {
   webSocket.onmessage = function onMessage(message) {
     try {
       var messageData = JSON.parse(message.data);
-      console.log(messageData);
-  
+      
+    if(messageData.IotData){
       var pos = {
         lat: messageData.IotData.lat,
         lng: messageData.IotData.lng,
@@ -298,7 +344,34 @@ var chart8 = new Chart(ctx8, {
      chart6.update()
      chart7.update()
     
-    
+    } else {
+
+     var length = data9.labels.length
+    if (length >= 20) {
+      data9.datasets[0].data.shift()
+      data9.labels.shift()
+    }
+
+      //data9.labels.push(moment().format('HH:mm:ss'))
+      data9.labels.push(messageData[0].metadata.gateways[0].time)
+      data9.datasets[0].data.push(messageData[0].payload_fields.celcius)
+      chart9.update()
+
+      var length = data10.labels.length
+      if (length >= 20) {
+        data10.datasets[0].data.shift()
+        data10.labels.shift()
+      }
+  
+        
+        data10.labels.push(messageData[0].metadata.gateways[0].time)
+        data10.datasets[0].data.push(messageData[0].metadata.gateways[0].rssi)
+       // console.log(messageData[0].metadata.gateways[0].timestamp);
+        chart10.update()
+
+
+
+    }
      
       
     } catch (err) {
