@@ -360,7 +360,7 @@ var chart10 = new Chart(ctx10, {
 
 
     
-    if(actualiza){
+    if(actuailizar){
 
       var length = data9.labels.length
     if (length >= 20) {
