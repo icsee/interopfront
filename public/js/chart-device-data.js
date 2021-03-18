@@ -348,25 +348,27 @@ var chart10 = new Chart(ctx10, {
     
     } else {
 
-     var length = data9.labels.length
+     
+     
+   if(timeaux===0){
+      timeaux=messageData[0].metadata.time
+      actuailizar=true
+    }else if(timeaux==messageData[0].metadata.time){
+      actuailizar=false
+    }else{actuailizar=true
+      timeaux=messageData[0].metadata.time}
+
+
+    
+    if(actualiza){
+
+      var length = data9.labels.length
     if (length >= 20) {
       data9.datasets[0].data.shift()
       data9.labels.shift()
     }
-     
-    if(timeaux===0){
-      timeaux=messageData[0].metadata.gateways[0].time
-      actuailizar=true
-    }else if(timeaux==messageData[0].metadata.gateways[0].time){
-      actuailizar=false
-    }else{actuailizar=true
-      timeaux=messageData[0].metadata.gateways[0].time}
-
-
-
-    if(actuailizar){
       //data9.labels.push(moment().format('HH:mm:ss'))
-      data9.labels.push(messageData[0].metadata.gateways[0].time)
+      data9.labels.push(messageData[0].metadata.time)
       data9.datasets[0].data.push(messageData[0].payload_fields.celcius)
      
       chart9.update()
@@ -378,7 +380,7 @@ var chart10 = new Chart(ctx10, {
       }
   
         
-        data10.labels.push(messageData[0].metadata.gateways[0].time)
+        data10.labels.push(messageData[0].metadata.time)
         data10.datasets[0].data.push(messageData[0].metadata.gateways[0].rssi)
        // console.log(messageData[0].metadata.gateways[0].timestamp);
         chart10.update()
