@@ -217,6 +217,8 @@ var chart10 = new Chart(ctx10, {
   // 3. Find or create a cached device to hold the telemetry data
   // 4. Append the telemetry data
   // 5. Update the chart UI
+  var timeaux=0;
+  var actuailizar=false;
   webSocket.onmessage = function onMessage(message) {
     try {
       var messageData = JSON.parse(message.data);
@@ -351,10 +353,22 @@ var chart10 = new Chart(ctx10, {
       data9.datasets[0].data.shift()
       data9.labels.shift()
     }
+     
+    if(timeaux===0){
+      timeaux=messageData[0].metadata.gateways[0].time
+      actuailizar=true
+    }else if(timeaux==messageData[0].metadata.gateways[0].time){
+      actuailizar=false
+    }else{actuailizar=true
+      timeaux=messageData[0].metadata.gateways[0].time}
 
+
+
+    if(actuailizar){
       //data9.labels.push(moment().format('HH:mm:ss'))
       data9.labels.push(messageData[0].metadata.gateways[0].time)
       data9.datasets[0].data.push(messageData[0].payload_fields.celcius)
+     
       chart9.update()
 
       var length = data10.labels.length
@@ -369,7 +383,7 @@ var chart10 = new Chart(ctx10, {
        // console.log(messageData[0].metadata.gateways[0].timestamp);
         chart10.update()
 
-
+    }
 
     }
      
