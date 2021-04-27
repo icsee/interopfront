@@ -59,7 +59,7 @@ function comando1() {
 
 
 
-setInterval(comando1, 5000);
+/*setInterval(comando1, 5000);*/
 
 
 
